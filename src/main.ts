@@ -13,7 +13,7 @@ async function run(): Promise<void> {
     const gitHubToken = core.getInput("github-token", { required: true })
     const context = github.context;
 
-    console.log(context.payload);
+    //console.log(context.payload);
 
     const client = github.getOctokit(gitHubToken);
     const priorities = prioritiesString.split(',');
