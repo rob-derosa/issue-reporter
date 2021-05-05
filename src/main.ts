@@ -9,7 +9,7 @@ type UnassignedIssue = {
 
 async function run(): Promise<void> {
   try {
-    const prioritiesString = "blocker,critical,important"
+    const prioritiesString = core.getInput("priorities", { required: true })
     const gitHubToken = core.getInput("github-token", { required: true })
     const context = github.context;
 
