@@ -18,8 +18,8 @@ async function run(): Promise<void> {
     const client = github.getOctokit(gitHubToken);
     const priorities = prioritiesString.split(',');
     const issues = await client.paginate(client.rest.issues.listForRepo, {
-      owner: "githubcustomers",
-      repo: "linkedin",
+      owner: context.repo.owner,
+      repo: context.repo.repo,
       per_page: 200,
     });
 
