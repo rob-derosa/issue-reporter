@@ -586,12 +586,12 @@ function run() {
             const prioritiesString = core.getInput("priorities", { required: true });
             const gitHubToken = core.getInput("github-token", { required: true });
             const context = github.context;
-            console.log(context.payload);
+            //console.log(context.payload);
             const client = github.getOctokit(gitHubToken);
             const priorities = prioritiesString.split(',');
             const issues = yield client.paginate(client.rest.issues.listForRepo, {
-                owner: "githubcustomers",
-                repo: "linkedin",
+                owner: context.repo.owner,
+                repo: context.repo.repo,
                 per_page: 200,
             });
             const unassignedIssues = new Array();
@@ -631,7 +631,7 @@ function run() {
                 output += `* [Issue #${unassignedIssue.issue.number}](${unassignedIssue.issue.html_url}): ${unassignedIssue.issue.title}\n`;
             }
             let gist = yield client.gists.create({ description: "Prioritized + Unassigned Issues", files: { ["report.md"]: { content: output.toString() } } });
-            console.log(gist.data.html_url);
+            console.log("Report Url: " + gist.data.html_url);
             core.setOutput("report-url", gist.data.html_url);
         }
         catch (error) {
