@@ -68,7 +68,7 @@ async function run(): Promise<void> {
     }
 
     let gist = await client.gists.create({ description: "Prioritized + Unassigned Issues", files: { [ "report.md"] : {content: output.toString()}}});
-    console.log(gist.data.html_url);
+    console.log("Report Url: " + gist.data.html_url);
     core.setOutput("report-url", gist.data.html_url);
 
   } catch (error) {
