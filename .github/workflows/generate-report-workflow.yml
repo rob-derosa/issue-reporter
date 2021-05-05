@@ -10,4 +10,4 @@ jobs:
         name: "Generate report"
         with:
           priorities: "blocker,critical,important"
-          github-token: ${{ secrets.GITHUB_TOKEN }}
+          github-token: ${{ secrets.ISSUE_PAT }}
