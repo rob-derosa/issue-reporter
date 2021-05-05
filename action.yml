@@ -16,4 +16,4 @@ outputs:
       description: 'A url to the generated gist report'
 runs:
   using: 'node12'
-  main: 'dist/main.js'
+  main: 'dist/index.js'
