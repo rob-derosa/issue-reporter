@@ -12,7 +12,7 @@ inputs:
     required: true
     description: 'Your GitHub token'
 outputs:
-  results:
+  report-url:
       description: 'A url to the generated gist report'
 runs:
   using: 'node12'

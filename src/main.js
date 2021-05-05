@@ -78,12 +78,11 @@ function run() {
                     lastPriority = unassignedIssue.priority;
                     output += `### ${lastPriority}\n`;
                 }
-                //console.log(unassignedIssue.issue);
                 output += `* [Issue #${unassignedIssue.issue.number}](${unassignedIssue.issue.html_url}): ${unassignedIssue.issue.title}\n`;
             }
             let gist = yield client.gists.create({ description: "Prioritized + Unassigned Issues", files: { ["report.md"]: { content: output.toString() } } });
             console.log(gist.data.html_url);
-            //console.log(output.toString());
+            core.setOutput("report-url", gist.data.html_url);
         }
         catch (error) {
             console.log(error);
