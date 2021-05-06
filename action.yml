@@ -10,7 +10,7 @@ inputs:
     description: 'A comma delimited list of priority labels'
   github-token:
     required: true
-    description: 'Your GitHub token'
+    description: 'A PAT that has the ability to read repos and post gists'
 outputs:
   report-url:
       description: 'A url to the generated gist report'
