@@ -1,4 +1,4 @@
-# Issue Reporter 
+# Unassigned Issue Reporter 
 
 Generates a gist report of labeled issues that are unassigned. This can be helpful if a certain subset of issues require an assignee based on the label applied, like `blocker` or `showstopper` or `needs triage`, etc.
 
@@ -19,7 +19,6 @@ jobs:
           priorities: "blocker,critical,important"
           github-token: ${{ secrets.ISSUE_PAT }}
 ```
-
 
 ## License
 
