@@ -583,10 +583,9 @@ const github = __importStar(__webpack_require__(469));
 function run() {
     return __awaiter(this, void 0, void 0, function* () {
         try {
-            const prioritiesString = core.getInput("priorities", { required: true });
+            const prioritiesString = core.getInput("labels", { required: true });
             const gitHubToken = core.getInput("github-token", { required: true });
             const context = github.context;
-            //console.log(context.payload);
             const client = github.getOctokit(gitHubToken);
             const priorities = prioritiesString.split(',');
             const issues = yield client.paginate(client.rest.issues.listForRepo, {
@@ -607,10 +606,12 @@ function run() {
                                 priorityRank: priorities.indexOf(label.name),
                             };
                             unassignedIssues.push(unassignedIssue);
+                            break;
                         }
                     }
                 }
             }
+            //Sort based on severity
             var sortedIssues = unassignedIssues.sort((n1, n2) => {
                 if (n1.priorityRank > n2.priorityRank) {
                     return 1;
@@ -630,9 +631,14 @@ function run() {
                 }
                 output += `* [Issue #${unassignedIssue.issue.number}](${unassignedIssue.issue.html_url}): ${unassignedIssue.issue.title}\n`;
             }
-            let gist = yield client.gists.create({ description: "Prioritized + Unassigned Issues", files: { ["report.md"]: { content: output.toString() } } });
-            console.log("Report Url: " + gist.data.html_url);
-            core.setOutput("report-url", gist.data.html_url);
+            if (sortedIssues.length > 0) {
+                let gist = yield client.gists.create({ description: "Prioritized Unassigned Issues", files: { ["unassigned-issues-report.md"]: { content: output.toString() } } });
+                console.log("Unassigned Issues Report Url: " + gist.data.html_url);
+                core.setOutput("report-url", gist.data.html_url);
+            }
+            else {
+                console.log("No results, therefore no report.");
+            }
         }
         catch (error) {
             console.log(error);

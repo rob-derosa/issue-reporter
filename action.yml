@@ -1,13 +1,13 @@
-name: 'Unassigned Issues Reporter'
-description: 'Generates a gist report of unassigned issues with a priority label'
+name: 'Labeled Unassigned Issues Report Generator'
+description: 'Generates a gist report of open, unassigned issues with at least one of the specified labels applied'
 author: 'rob-derosa@github.com'
 branding:
   icon: alert-triangle
   color: red
 inputs:
-  priorities:
+  labels:
     required: true
-    description: 'A comma delimited list of priority labels'
+    description: 'A comma delimited ordered list of required labels'
   github-token:
     required: true
     description: 'A PAT that has the ability to read repos and post gists'

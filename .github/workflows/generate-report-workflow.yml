@@ -7,7 +7,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: ./
-        name: "Generate report"
+        name: "generate report of unassigned issues"
         with:
-          priorities: "blocker,critical,important"
+          labels: "blocker,critical,important"
           github-token: ${{ secrets.ISSUE_PAT }}

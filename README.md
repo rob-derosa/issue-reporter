@@ -4,7 +4,6 @@ Generates a gist report of labeled issues that are unassigned. This can be helpf
 
 A URL of the new gist will be output and show in the log.
 
-
 ## Sample Usage
 
 ```yaml
