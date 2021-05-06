@@ -66,7 +66,7 @@ async function run(): Promise<void> {
       var diff = new Date().getTime() - new Date(issue.issue.created_at).getTime();
       let days = Math.round((diff / (60 * 60 * 24 * 1000)));
 
-      output += `\n* [Issue #${issue.issue.number}](${issue.issue.html_url}): unassigned for ${issue.issue.title}: ${days} days`;
+      output += `\n* [Issue #${issue.issue.number}](${issue.issue.html_url}): ${issue.issue.title}: unassigned for ${days} days`;
     }
 
     if (sortedIssues.length > 0) {
