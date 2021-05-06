@@ -54,7 +54,8 @@ async function run(): Promise<void> {
       return 0;
     });
 
-    let output = `## Issues to be Assigned as of ${new Date().toISOString()} for ${context.repo.owner}/${context.repo.repo}`;
+    const repo = `${context.repo.owner}/${context.repo.repo}`;
+    let output = `## Issues to be assigned as of ${new Date().toLocaleDateString('en-US')} for [${repo}(${repo})`;
     let lastPriority;
     for (const issue of sortedIssues) {
       if(lastPriority != issue.priority){
