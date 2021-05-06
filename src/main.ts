@@ -58,7 +58,7 @@ async function run(): Promise<void> {
     let output = `## Issues to be assigned as of ${new Date().toLocaleDateString('en-US')} for [${repo}](${repo})`;
     let lastPriority;
     for (const issue of sortedIssues) {
-      if(lastPriority != issue.priority){
+      if (lastPriority != issue.priority) {
         lastPriority = issue.priority;
         output += `\n### ${lastPriority}`;
       }
@@ -69,16 +69,16 @@ async function run(): Promise<void> {
       output += `\n* [Issue #${issue.issue.number}](${issue.issue.html_url}): ${issue.issue.title}: ~${days} days without an assignee`;
     }
 
-    if(sortedIssues.length > 0) {
-      let gist = await client.gists.create({ description: "Prioritized Unassigned Issues", files: { [ "unassigned-issues-report.md"] : {content: output.toString()}}});
-    console.log("Unassigned Issues Report Url: " + gist.data.html_url);
-    core.setOutput("report-url", gist.data.html_url);
+    if (sortedIssues.length > 0) {
+      let gist = await client.gists.create({ description: "Prioritized Unassigned Issues", files: { ["unassigned-issues-report.md"]: { content: output.toString() } } });
+      console.log("Unassigned Issues Report Url: " + gist.data.html_url);
+      core.setOutput("report-url", gist.data.html_url);
     } else {
       console.log("No results, therefore no report.");
     }
   } catch (error) {
     console.log(error);
-   
+
     core.setFailed(error.message)
   }
 }
