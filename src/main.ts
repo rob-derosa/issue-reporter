@@ -18,7 +18,7 @@ async function run(): Promise<void> {
     const issues = await client.paginate(client.rest.issues.listForRepo, {
       owner: context.repo.owner,
       repo: context.repo.repo,
-      per_page: 200,
+      per_page: 500,
     });
 
     const unassignedIssues = new Array<any>();
@@ -41,7 +41,7 @@ async function run(): Promise<void> {
       }
     }
 
-    //Sort based on order
+    //Sort based on label order
     var sortedIssues: UnassignedIssue[] = unassignedIssues.sort((n1, n2) => {
       if (n1.priorityRank > n2.priorityRank) {
         return 1;
@@ -54,17 +54,18 @@ async function run(): Promise<void> {
       return 0;
     });
 
-    let output = "";
-    output += `## Issues Needing an Owner\n`;
+    let output = `## Issues Needing an Owner`;
     let lastPriority;
-    for (const unassignedIssue of sortedIssues) {
-
-      if(lastPriority != unassignedIssue.priority){
-        lastPriority = unassignedIssue.priority;
-        output += `### ${lastPriority}\n`;
+    for (const issue of sortedIssues) {
+      if(lastPriority != issue.priority){
+        lastPriority = issue.priority;
+        output += `\n### ${lastPriority}`;
       }
 
-      output += `* [Issue #${unassignedIssue.issue.number}](${unassignedIssue.issue.html_url}): ${unassignedIssue.issue.title}\n`;
+      var diff = new Date().getTime() - new Date(issue.issue.created_at).getTime();
+      let days = Math.round((diff / (60 * 60 * 24 * 1000)));
+
+      output += `\n* [Issue #${issue.issue.number}](${issue.issue.html_url}): ${issue.issue.title} - ~${days} days without an assignee`;
     }
 
     if(sortedIssues.length > 0) {
