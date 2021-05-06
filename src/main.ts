@@ -55,7 +55,7 @@ async function run(): Promise<void> {
     });
 
     const repo = `${context.repo.owner}/${context.repo.repo}`;
-    let output = `## Issues to be assigned as of ${new Date().toLocaleDateString('en-US')} for [${repo}](${repo})`;
+    let output = `## Issues to be assigned as of ${new Date().toLocaleDateString('en-US')} for [${repo}](https://github.com/${repo})`;
     let lastPriority;
     for (const issue of sortedIssues) {
       if (lastPriority != issue.priority) {
@@ -66,7 +66,7 @@ async function run(): Promise<void> {
       var diff = new Date().getTime() - new Date(issue.issue.created_at).getTime();
       let days = Math.round((diff / (60 * 60 * 24 * 1000)));
 
-      output += `\n* [Issue #${issue.issue.number}](${issue.issue.html_url}): ${issue.issue.title}: ~${days} days without an assignee`;
+      output += `\n* [Issue #${issue.issue.number}](${issue.issue.html_url}): ${issue.issue.title}: ${days} days without an assignee`;
     }
 
     if (sortedIssues.length > 0) {
