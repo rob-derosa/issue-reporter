@@ -7,7 +7,7 @@ A URL of the new gist will be output and show in the log.
 ## Sample Usage
 
 ```yaml
-name: 'Generate unassigned issue report'
+name: 'Generate unassigned issues report'
 on:
   workflow_dispatch
 jobs:
