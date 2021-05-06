@@ -1,4 +1,4 @@
-name: 'Generate unassigned issues report'
+name: 'Unassigned issues report'
 on:
   workflow_dispatch
 jobs:
@@ -7,7 +7,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: ./
-        name: "generate report of unassigned issues"
+        name: "Generate report of unassigned issues"
         with:
           labels: "blocker,critical,important"
           github-token: ${{ secrets.ISSUE_PAT }}
