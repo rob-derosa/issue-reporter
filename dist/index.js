@@ -596,7 +596,7 @@ function run() {
             });
             const unassignedIssues = new Array();
             for (const issue of issues) {
-                if (issue.state == "closed")
+                if (issue.state != "open")
                     continue;
                 for (const label of issue.labels) {
                     if (priorities.indexOf(label.name) > -1) {

@@ -25,7 +25,7 @@ async function run(): Promise<void> {
 
     const unassignedIssues = new Array<any>();
     for (const issue of issues) {
-      if (issue.state == "closed")
+      if (issue.state != "open")
         continue;
 
       for (const label of issue.labels) {
