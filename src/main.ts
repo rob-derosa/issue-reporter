@@ -41,7 +41,7 @@ async function run(): Promise<void> {
       }
     }
 
-    //Sort based on severity
+    //Sort based on order
     var sortedIssues: UnassignedIssue[] = unassignedIssues.sort((n1, n2) => {
       if (n1.priorityRank > n2.priorityRank) {
         return 1;

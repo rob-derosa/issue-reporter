@@ -15,10 +15,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: rob-derosa/issue-reporter@main
-        name: "Generate report"
+      - uses: ./
+        name: "generate report of unassigned issues"
         with:
-          priorities: "blocker,critical,important"
+          labels: "blocker,critical,important"
           github-token: ${{ secrets.GIST_PAT }}
 ```
 
